@@ -1,5 +1,7 @@
 # ML in prod
-A python predictive system design.
+#### A python predictive system design.
+
+Article: https://medium.com/contentsquare-engineering-blog/machine-learning-in-production-c53b43283ab1
 
 ## Building the pipeline
 ```bash
