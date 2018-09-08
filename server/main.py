@@ -21,13 +21,14 @@ def launch_model(mdl, request):
         features_as_dict = request.get_json()
         features_as_df = pd.io.json.json_normalize(features_as_dict)
 
-        logger.debug("Predicting {}".format(features_as_df))
+        logger.info("Predicting {}".format(features_as_df))
         binary_predictions = mdl.predict(features_as_df)
 
-        detected_zones = str(binary_predictions[0])
-    except Exception:
+        detected_zones = str(binary_predictions[0]) + '\n'
+        logger.info("Predicted {}".format(detected_zones))
+    except Exception as e:
         logger.exception("Error in pipeline")
-        raise BadRequest(description=e.message)
+        raise BadRequest(description=getattr(e, 'message', repr(e)))
 
     return detected_zones
 
@@ -44,5 +45,5 @@ if __name__ == "__main__":
         application.run()
     except KeyboardInterrupt:
         logger.exception("Shutting down")
-    except Exception, e:
+    except Exception:
         logger.exception("Error in initialization chain")

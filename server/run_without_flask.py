@@ -8,7 +8,7 @@ dataframe = read_csv(url, names=features + [label])
 X = dataframe[features]
 Y = dataframe[label]
 
-with open('pipeline.pk', 'r') as f:
+with open('pipeline.pk', 'rb') as f:
     clf = dill.load(f)
 
-print clf.score(X, Y)
+print(clf.score(X, Y))
